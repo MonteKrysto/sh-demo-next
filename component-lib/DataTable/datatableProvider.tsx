@@ -16,19 +16,14 @@ const DataTableProvider = ({ children, data, defaultColumns, caption, captionPla
     setState({ data, defaultColumns, caption, captionPlacement, numeric });
   }, [data, defaultColumns, caption, captionPlacement, numeric]);
 
-  // const updateColumns = useMemo(
-  //   () => (columns: string[]) => {
-  //     console.log("in updateColumns", columns);
-  //     setState({ ...state, defaultColumns: [...defaultColumns, "todd"] });
-  //   },
-  //   [state]
-  // );
-  const updateColumns = (columns: string[]) => {
-    console.log("in updateColumns", columns);
-    setState({ ...state, defaultColumns: [...defaultColumns, ...columns] });
-  };
+  const updateColumns = React.useCallback(
+    (columns: string[]) => {
+      setState({ ...state, defaultColumns: [...defaultColumns, ...columns] });
+    },
+    [defaultColumns, state]
+  );
 
-  const value = useMemo(() => ({ state, updateColumns, defaultColumns, data }), [data, defaultColumns, state]);
+  const value = useMemo(() => ({ state, updateColumns, data }), [data, state, updateColumns]);
 
   return <DataTableCtx.Provider value={value}>{children}</DataTableCtx.Provider>;
 };

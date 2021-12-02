@@ -64,8 +64,8 @@ const Members = () => {
         <DataTable
           data={data.members}
           caption='test table'
-          defaultColumns={["firstname", "lastname", "email"]}
-          linkColumns={{ field: "firstname", to: "id", route: "members" }}
+          defaultColumns={["memberName", "email", "previsit", "created", "verified"]}
+          linkColumns={{ field: "memberName", to: "id", route: "members" }}
         >
           <TableDropdown fieldToUse='columns' isMultiSelect />
         </DataTable>

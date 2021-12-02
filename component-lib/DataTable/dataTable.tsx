@@ -67,7 +67,7 @@ const DataTableMain: React.FC<Partial<DataTableProps>> = ({
   linkColumns,
   ...rest
 }: Partial<DataTableProps>) => {
-  const { data, defaultColumns, caption, captionPlacement, numeric, state } = useDataTable();
+  const { data, caption, captionPlacement, numeric, state } = useDataTable();
 
   return (
     <>
@@ -80,11 +80,11 @@ const DataTableMain: React.FC<Partial<DataTableProps>> = ({
           {data.map(row => {
             return (
               <Tr key={row.id}>
-                {state.defaultColumns.map(column => {
+                {state.defaultColumns.map((column: string) => {
                   return !Array.isArray(row[column]) ? (
                     linkColumns?.field === column ? (
-                      <Td key={column}>
-                        <Link href={`${linkColumns.route}/${row[linkColumns.to]}`}>{row[column]}</Link>
+                      <Td key={column} color='green'>
+                        <Link href={`${linkColumns?.route}/${row[linkColumns!.to]}`}>{row[column]}</Link>
                       </Td>
                     ) : (
                       <Td key={column} isNumeric={numeric}>
@@ -100,7 +100,7 @@ const DataTableMain: React.FC<Partial<DataTableProps>> = ({
           })}
         </Tbody>
         <Tfoot>
-          <TitleRow defaultColumns={defaultColumns} />
+          <TitleRow defaultColumns={state.defaultColumns} />
         </Tfoot>
       </ChakraTable>
       {children}
@@ -108,7 +108,7 @@ const DataTableMain: React.FC<Partial<DataTableProps>> = ({
   );
 };
 
-const TitleRow: React.FC<Partial<DataTableCtxType>> = ({ defaultColumns }: Partial<DataTableCtxType>) => {
+const TitleRow = ({ defaultColumns }: Pick<DataTableCtxType, "defaultColumns">) => {
   return (
     <Tr>
       {defaultColumns?.map((column: string) => (
@@ -120,8 +120,8 @@ const TitleRow: React.FC<Partial<DataTableCtxType>> = ({ defaultColumns }: Parti
 
 const TableDropdown: React.FC<DropDownProps> = ({
   data,
-  defaultColumns,
-  linkColumns,
+  // defaultColumns,
+  // linkColumns,
   fieldToUse,
   isMultiSelect = true,
 }: DropDownProps) => {
@@ -136,11 +136,12 @@ const TableDropdown: React.FC<DropDownProps> = ({
   }
 
   const getColumns = (val: any) => {
+    console.log("in get cols");
     const keys: string[] = [];
     Object.keys(val).forEach((key, idx) => {
       keys.push(val[idx].label);
     });
-
+    console.log("keys: ", keys);
     updateColumns(keys);
   };
   return (

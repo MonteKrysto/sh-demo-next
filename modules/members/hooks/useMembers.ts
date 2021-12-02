@@ -9,6 +9,10 @@ const GET_MEMBERS = gql`
       id
       firstname
       lastname
+      memberName
+      previsit
+      verified
+      created
       email
       zoomUrl
       schedulingUrl
@@ -39,6 +43,10 @@ const GET_MEMBER = gql`
       id
       firstname
       lastname
+      memberName
+      previsit
+      verified
+      created
       email
       zoomUrl
       schedulingUrl

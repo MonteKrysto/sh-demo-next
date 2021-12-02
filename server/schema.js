@@ -32,8 +32,11 @@ export const typeDefs = gql`
     id: ID!
     firstname: String!
     lastname: String!
+    memberName: String!
     email: String!
-    previsit: Boolean!
+    previsit: String!
+    verified: String!
+    created: String!
     street: String!
     city: String!
     state: String!

@@ -16,7 +16,8 @@ export type DataTableProps = DataTableCtxType & {
 };
 
 export type DataTableCtxType = {
-  defaultColumns: string[];
+  defaultColumns?: string[];
+  updateColumns?: (columns: string[]) => void;
   data: DataType[];
   caption?: string;
   captionPlacement?: "top" | "bottom";
