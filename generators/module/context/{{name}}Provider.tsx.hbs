@@ -1,0 +1,28 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { Props, {{properCase name}}CtxType } from "../types";
+
+const {{properCase name}}Ctx = React.createContext<{{properCase name}}CtxType>({} as {{properCase name}}CtxType);
+
+const {{properCase name}}Provider = ({ children }: Props) => {
+  const [state, setState] = useState<Omit<{{properCase name}}CtxType, "children">>({});
+
+  useEffect(() => {
+
+  }, []);
+
+
+  const value = useMemo(() => ({ state, setState }), [state]);
+
+  return <{{properCase name}}Ctx.Provider value={value}>{children}</{{properCase name}}Ctx.Provider>;
+};
+
+const use{{properCase name}} = () => {
+  const context = React.useContext({{properCase name}}Ctx);
+
+  if (context === undefined) {
+    throw new Error("use{{properCase name}} must be used within a {{properCase name}}Provider");
+  }
+  return context;
+};
+
+export { {{properCase name}}Provider, use{{properCase name}} };

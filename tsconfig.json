@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "plopfile.js", "generators/component/index.js", "generators/module/index.js", "back/utils.js"],
   "exclude": ["node_modules"]
 }
